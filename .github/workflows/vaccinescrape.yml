@@ -38,5 +38,5 @@ jobs:
         git config --local user.name github-actions
         git config --local user.email "actions@github.com"
         git add data/*
-        git commit -am "GH ACTION data upload $(date)"
+        git commit -m "GH ACTION data upload $(date)"
         git push origin master
