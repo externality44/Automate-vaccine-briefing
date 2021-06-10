@@ -139,4 +139,3 @@ if(!file.exists('data/wales_vaccine.csv')){
               row.names = FALSE, col.names = FALSE,
               sep = ",", append = TRUE)
 }
-
