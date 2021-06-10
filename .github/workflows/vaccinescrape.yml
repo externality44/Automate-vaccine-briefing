@@ -1,0 +1,42 @@
+name: vaccinescrape
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  schedule:
+    - cron: '00 16 * * *'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # Scraping job
+  autoscrape:
+    # The type of runner that the job will run on
+    runs-on: macos-latest
+
+    # Load repo and install R
+    steps:
+    - uses: actions/checkout@v2
+    - uses: r-lib/actions/setup-r@master
+
+    # Set-up R
+    - name: Install pacakges
+      run: |
+        R -e 'install.packages("magrittr")'
+        R -e 'install.packages("rvest")'
+        R -e 'install.packages("readxl")'
+        R -e 'install.packages("tidyverse")'
+        R -e 'install.packages("httr")'
+        R -e 'install.packages("polite")'
+        R -e 'install.packages("rjson")'
+    # Run R script
+    - name: Scrape
+      run: Rscript Run_vaccine_scrape.R
+    
+    # Add new files in data folder, commit along with other modified files, push
+    - name: Commit files
+      run: |
+        git config --local user.name github-actions
+        git config --local user.email "actions@github.com"
+        git add data/*
+        git commit -am "GH ACTION data upload $(date)"
+        git push origin master
