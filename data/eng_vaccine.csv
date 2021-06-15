@@ -52,3 +52,11 @@ Region,1st dose,2nd dose,Total doses,Publication_date
 "North East and Yorkshire","5403121","4028713","9431834",2021-06-14
 "North West","4389363","3207220","7596583",2021-06-14
 "South East","5664697","4163259","9827956",2021-06-14
+"NHS Region of Residence4","1st dose","2nd dose","Cumulative Total Doses to Date",2021-06-15
+"England5","34965745","25566178","60531923",2021-06-15
+"East of England","4151724","3069797","7221521",2021-06-15
+"London","4792944","3085877","7878821",2021-06-15
+"Midlands","6521360","4982842","11504202",2021-06-15
+"North East and Yorkshire","5416673","4055448","9472121",2021-06-15
+"North West","4402217","3231339","7633556",2021-06-15
+"South East","5682341","4191615","9873956",2021-06-15
