@@ -14,9 +14,8 @@ tryCatch({
     polite::scrape(eng_bow) %>% 
     rvest::html_nodes("a") %>% # Find all links
     rvest::html_attr("href") %>% # Extract the urls
-    stringr::str_subset("COVID-19-daily") %>% #only get the daily files 
-    .[[1]] # Pull the first file (latest)
-  
+    stringr::str_subset("COVID-19-daily") #only get the daily files 
+    
   filename <- basename(eng_scrape) #get file name
   
   # Download latest file 
@@ -29,14 +28,14 @@ tryCatch({
 
 #getting publication date out 
 pub_date <- readxl::read_excel(path=paste0(filename[i]), range = "C7", col_names = FALSE) %>%
-            .[[1]] %>% lubridate::dmy()
+                             .[[1]] %>% lubridate::dmy()
 
 #giving consistent column names 
 names <- c("Region", "", "1st dose", "2nd dose","", "Total doses")
 eng_vacc <- readxl::read_xlsx(path=paste0(filename[i]),
-                              range = "B13:G22", col_names = names) %>% 
-                    select("Region", "1st dose", "2nd dose", "Total doses")%>%
-                    mutate(Publication_date = pub_date) %>%
+                              range = "B14:G22", col_names = names) %>% 
+                    dplyr::select("Region", "1st dose", "2nd dose", "Total doses")%>%
+                    dplyr::mutate(Publication_date = pub_date) %>%
                     na.omit() 
 
 if(!file.exists('data/eng_vaccine.csv')){
