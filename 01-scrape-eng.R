@@ -14,8 +14,9 @@ tryCatch({
     polite::scrape(eng_bow) %>% 
     rvest::html_nodes("a") %>% # Find all links
     rvest::html_attr("href") %>% # Extract the urls
-    stringr::str_subset("COVID-19-daily") #only get the daily files 
-    
+    stringr::str_subset("COVID-19-daily") %>% #only get the daily files 
+    .[[1]] # Pull the first file (latest)
+  
   filename <- basename(eng_scrape) #get file name
   
   # Download latest file 
