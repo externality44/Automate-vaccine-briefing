@@ -3,6 +3,7 @@ library(tidyverse)
 library(polite)
 library(rvest)
 library(readxl)
+library(lubridate)
 
 #polite scraping 
 url <- "https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-vaccinations/"
@@ -10,7 +11,7 @@ eng_bow <- polite::bow(url)
 
 tryCatch({
   message("Scraping latest England vaccination statistics")
-  today <- toString(day(today()))
+  today <- toString(lubridate::day(lubridate::today()))
     
   eng_scrape <- 
     polite::scrape(eng_bow) %>% 
