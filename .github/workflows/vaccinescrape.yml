@@ -28,6 +28,8 @@ jobs:
         R -e 'install.packages("httr")'
         R -e 'install.packages("polite")'
         R -e 'install.packages("rjson")'
+        R -e 'install.packages("lubridate")'
+    
     # Run R script
     - name: Scrape
       run: Rscript Run_vaccine_scrape.R
