@@ -1,8 +1,8 @@
 library(magrittr)
 library(tidyverse)
 library(polite)
-library(stringr)
 library(rvest)
+library(lubridate)
 
 ##NI 
 url4 <- "https://covid-19.hscni.net/"
@@ -34,8 +34,14 @@ scrape_date <- html_node(page, xpath=datexpath) %>%
                   html_text() %>% str_split(pattern = " ") %>% unlist() %>% 
                     stringr::str_extract("^[0-9]+$") %>% na.omit()
 
+scrape_month <- html_node(page, xpath=datexpath) %>%
+                  html_text() %>% str_split(pattern = " ") %>% unlist() %>% 
+                    stringr::str_extract("[A-Za-z]+") %>% 
+                      stringr::str_extract("January|February|March|April|May|June|
+                                           July|August|September|October|November|December") %>% na.omit 
+
 pub_date <- paste0(scrape_date,"-", 
-                   lubridate::month(Sys.Date()), "-", 
+                   match(scrape_month, month.name), "-", 
                      lubridate::year(Sys.Date())) %>% lubridate::dmy()
 
 NI <- data.frame(Region = "Northern Ireland") %>%
