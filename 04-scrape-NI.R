@@ -42,7 +42,7 @@ scrape_month <- html_node(page, xpath=datexpath) %>%
 
 pub_date <- paste0(scrape_date,"-", 
                    match(scrape_month, month.name), "-", 
-                     lubridate::year(Sys.Date())) %>% lubridate::dmy()
+                     lubridate::year(Sys.Date())) %>% lubridate::dmy()  ##this will need updating in the new year 
 
 NI <- data.frame(Region = "Northern Ireland") %>%
                   mutate("1st dose" = first_dose, #putting it all in a data frame
