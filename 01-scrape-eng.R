@@ -11,14 +11,13 @@ eng_bow <- polite::bow(url)
 
 tryCatch({
   message("Scraping latest England vaccination statistics")
-  today <- toString(lubridate::day(lubridate::today()))
     
   eng_scrape <- 
     polite::scrape(eng_bow) %>% 
     rvest::html_nodes("a") %>% # Find all links
     rvest::html_attr("href") %>% # Extract the urls
     stringr::str_subset("COVID-19-daily") %>% #only get the daily files 
-    stringr::str_subset(today) # Pull the first file (latest)
+    .[[1]] # Pull the first file (latest)
   
   filename <- basename(eng_scrape) #get file name
   
