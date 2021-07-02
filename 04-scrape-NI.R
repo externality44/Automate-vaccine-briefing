@@ -37,12 +37,14 @@ scrape_date <- html_node(page, xpath=datexpath) %>%
 scrape_month <- html_node(page, xpath=datexpath) %>%
                   html_text() %>% str_split(pattern = " ") %>% unlist() %>% 
                     stringr::str_extract("[A-Za-z]+") %>% 
-                      stringr::str_extract("January|February|March|April|May|June|
-                                           July|August|September|October|November|December") %>% na.omit 
 
-pub_date <- paste0(scrape_date,"-", 
-                   match(scrape_month, month.name), "-", 
-                     lubridate::year(Sys.Date())) %>% lubridate::dmy()  ##this will need updating in the new year 
+months <- c("January", "February", "March", "April", "May", "June", "July", 
+              "August", "September", "October", "November", "December")
+
+month <- scrape_month[(scrape_month %in% months)]
+
+pub_date <- paste0(scrape_date,"-", month, "-", lubridate::year(Sys.Date())) %>% 
+                        lubridate::dmy()
 
 NI <- data.frame(Region = "Northern Ireland") %>%
                   mutate("1st dose" = first_dose, #putting it all in a data frame
