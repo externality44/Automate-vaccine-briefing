@@ -36,7 +36,7 @@ scrape_date <- html_node(page, xpath=datexpath) %>%
 
 scrape_month <- html_node(page, xpath=datexpath) %>%
                   html_text() %>% str_split(pattern = " ") %>% unlist() %>% 
-                    stringr::str_extract("[A-Za-z]+") %>% 
+                    stringr::str_extract("[A-Za-z]+") 
 
 months <- c("January", "February", "March", "April", "May", "June", "July", 
               "August", "September", "October", "November", "December")
