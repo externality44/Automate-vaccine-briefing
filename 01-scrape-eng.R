@@ -36,7 +36,7 @@ pub_date <- readxl::read_excel(path=paste0(filename[i]), range = "C7", col_names
 #giving consistent column names 
 names <- c("Region", "", "1st dose", "2nd dose","", "Total doses")
 eng_vacc <- readxl::read_xlsx(path=paste0(filename[i]),
-                              range = "B14:G22", col_names = names) %>% 
+                              range = "B13:G21", col_names = names) %>% 
                     dplyr::select("Region", "1st dose", "2nd dose", "Total doses")%>%
                     dplyr::mutate(Publication_date = pub_date) %>%
                     na.omit() 
